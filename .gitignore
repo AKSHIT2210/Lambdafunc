@@ -72,3 +72,18 @@ release.properties
 
 ### Vagrant ###
 .vagrant/
+
+### common library for testing ###
+common/*
+
+### .zip files (dist) ###
+**/*.zip
+
+### pycache ###
+**/*.pyc
+**/_pycache__/**
+
+### tox ###
+.tox/*
+.tox-info.json
+lambda.egg-info/*
