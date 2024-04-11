@@ -15,7 +15,7 @@ Resources:
     Properties:
       CodeUri: ./
       Handler: lambda-test.lambda_handler
-      Runtime: python3.12
+      Runtime: python3.8
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           ENV: ${ENV}
