@@ -1,4 +1,4 @@
-SAM_ARTIFACT=<SAM_ARFIFACT_NAME>
+SAM_ARTIFACT=lambda
 
 # Notes from template:
 # () Each command in the makefile must be a single line, and each command is run in a separate shell. Newer versions
@@ -20,7 +20,7 @@ clean-all: clean
 	rm -rf venv .tox
 
 setup: 
-	python3 -m venv venv && source venv/bin/activate && pip3 install --upgrade pip && pip3 install -r requirements.txt -r build-requirements.txt -r tests/requirements.txt
+	python3 -m venv venv && . venv/bin/activate && pip3 install --upgrade pip && pip3 install -r requirements.txt -r build-requirements.txt -r tests/requirements.txt
 
 local-setup:
 	py -m pip install -r requirements.txt -r build-requirements.txt -r tests/requirements.txt
@@ -29,7 +29,7 @@ local-setup-mac:
 	py -m pip install -r requirements.txt -r build-requirements.txt -r tests/requirements.txt
 
 lint: 
-	source venv/bin/activate && flake8 . --exclude=legacyCode,venv --max-line-length=105
+	. venv/bin/activate && flake8 . --exclude=legacyCode,venv --max-line-length=105
 
 local-lint:
 	py -m flake8 . --max-line-length=105 --exclude=legacyCode,venv,.tox,common
@@ -44,11 +44,11 @@ local-test-mac:
 	python3 -m tox
 
 test: setup
-	source venv/bin/activate && tox
+	. venv/bin/activate && tox
 
 # Jenkins job: build -> package
 build: clean-all setup lint
-	source venv/bin/activate && sam build
+	. venv/bin/activate && sam build
 
 # Create the Makefile
 # Create a file called Makefile (no extension) in the root directory. This file will contain commands that can be run locally to automate dev/test workflows. In addition, this Makefile will be used during the Jenkins build pipeline. Specifically, the Jenkins pipeline will run make build followed by make package.
